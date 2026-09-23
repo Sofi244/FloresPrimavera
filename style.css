@@ -1,0 +1,212 @@
+:root {
+    --yellow: #fff4c2;
+    --yellow2: #ffe98a;
+    --pink-text: #c2447a;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    height: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--yellow);
+    overflow-x: hidden;
+  }
+  body {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    position: relative;
+  }
+  #hearts-container {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .heart {
+    position: absolute;
+    bottom: -40px;
+    font-size: 20px;
+    color: #e88cb0;
+    opacity: 0.75;
+    animation: floatUp linear forwards;
+    user-select: none;
+  }
+  @keyframes floatUp {
+    0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.6; }
+    100% { transform: translateY(-110vh) translateX(var(--drift, 20px)) rotate(360deg); opacity: 0; }
+  }
+
+  .content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 20px 40px;
+  }
+
+  h1 {
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--pink-text);
+    text-align: center;
+    margin: 8px 0 6px;
+    letter-spacing: 0.3px;
+  }
+
+  #subtitle {
+    min-height: 26px;
+    font-size: 16px;
+    color: #8a5a3a;
+    text-align: center;
+    margin: 0 0 20px;
+    font-style: italic;
+    opacity: 0;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    transform: translateY(-4px);
+  }
+  #subtitle.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .vase-wrap {
+    position: relative;
+    width: 300px;
+    height: 380px;
+    margin-bottom: 26px;
+  }
+
+  #bouquet {
+    position: absolute;
+    bottom: 72px;
+    left: 0;
+    width: 100%;
+    height: 300px;
+  }
+
+  .flower {
+    position: absolute;
+    bottom: 0;
+    transform-origin: bottom center;
+    opacity: 0;
+    animation: popIn 0.6s cubic-bezier(.34,1.56,.64,1) forwards, sway 3.5s ease-in-out infinite;
+  }
+  @keyframes popIn {
+    0% { opacity: 0; transform: scale(0) translateY(20px); }
+    70% { opacity: 1; transform: scale(1.1) translateY(-4px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  @keyframes sway {
+    0%, 100% { rotate: -3deg; }
+    50% { rotate: 3deg; }
+  }
+
+  .stem {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 3px;
+    background: #6fa563;
+    transform: translateX(-50%);
+    border-radius: 2px;
+  }
+
+  .petal-group {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .petal {
+    position: absolute;
+    width: 16px;
+    height: 22px;
+    background: #ffffff;
+    border: 1px solid #f0e6d2;
+    border-radius: 50% 50% 50% 50%;
+    box-shadow: inset 0 -2px 4px rgba(0,0,0,0.04);
+  }
+  .flower-center {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #ffd76b;
+    border-radius: 50%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+  }
+
+  .vase {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 130px;
+    height: 90px;
+    background: linear-gradient(180deg, #f3d9c4 0%, #e8bfa0 100%);
+    border-radius: 10px 10px 30px 30px;
+    box-shadow: 0 6px 10px rgba(0,0,0,0.08);
+  }
+  .vase::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 145px;
+    height: 20px;
+    background: #eec7ac;
+    border-radius: 50%;
+  }
+
+  #empty-hint {
+    position: absolute;
+    bottom: 100px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: #b89a78;
+    font-size: 13px;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+
+  button#add-btn {
+    background: var(--pink-text);
+    color: white;
+    border: none;
+    padding: 14px 30px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 30px;
+    box-shadow: 0 4px 12px rgba(194,68,122,0.35);
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  button#add-btn:active {
+    transform: scale(0.94);
+    box-shadow: 0 2px 6px rgba(194,68,122,0.3);
+  }
+  button#add-btn:disabled {
+    background: #d9a9be;
+    box-shadow: none;
+    cursor: default;
+  }
+
+  #counter {
+    margin-top: 14px;
+    font-size: 13px;
+    color: #a17a4e;
+  }
