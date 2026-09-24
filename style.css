@@ -209,4 +209,31 @@
     margin-top: 14px;
     font-size: 13px;
     color: #a17a4e;
+  } 
+
+  /* ESTILOS DEL FOOTER */
+  footer {
+    margin-top: auto;
+    width: 100%;
+    padding: 20px 0 10px;
+    text-align: center;
+    z-index: 2;
   }
+
+  footer p {
+    font-size: 13px;
+    color: #a17a4e;
+    margin: 0;
+  }
+
+  footer a {
+    color: var(--pink-text);
+    text-decoration: none;
+    font-weight: 600;
+    transition: opacity 0.2s ease;
+  }
+
+  footer a:hover {
+    opacity: 0.8;
+  }
+
